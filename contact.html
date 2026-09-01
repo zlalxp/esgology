@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
     <header class="bar">
       <a class="mark" href="./">ESGOLOGY</a>
-      <nav>
+      <nav aria-label="주요">
         <a href="./product.html">제품</a>
         <a href="./careers.html">채용</a>
         <a href="./contact.html" aria-current="page">연락</a>
       </nav>
     </header>
-    <main>
+    <main id="main" class="wrap">
       <section class="hero">
         <p class="kicker">연락</p>
         <h1>제품·회사 문의</h1>
@@ -23,10 +24,10 @@
           사업자 등록 전에는 회사 메일 도메인을 열지 않습니다. 지금은 제품 연락 주소를 씁니다.
         </p>
       </section>
-      <section class="card">
+      <section class="panel">
         <p>이메일: <a href="mailto:esgcheck@gmail.com">esgcheck@gmail.com</a></p>
         <p>제품: <a href="https://esgcheck.kr/">esgcheck.kr</a></p>
-        <p>회사 도메인: esgology.co.kr (DNS 연결 전)</p>
+        <p>회사 도메인: esgology.co.kr (가비아 DNS를 GitHub Pages에 붙인 뒤 열립니다)</p>
       </section>
     </main>
     <footer>

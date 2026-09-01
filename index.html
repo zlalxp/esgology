@@ -11,59 +11,72 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <a class="skip" href="#main">본문으로 건너뛰기</a>
     <header class="bar">
       <a class="mark" href="./">ESGOLOGY</a>
-      <nav>
-        <a href="./product.html">제품</a>
-        <a href="./careers.html">채용</a>
+      <nav aria-label="주요">
+        <a href="#work">하는 일</a>
+        <a href="#product">제품</a>
         <a href="./contact.html">연락</a>
       </nav>
     </header>
 
-    <main>
+    <main id="main" class="wrap">
       <section class="hero">
         <p class="kicker">회사</p>
-        <h1>ESGOLOGY는 공시 검토를 제품으로 만듭니다</h1>
+        <h1>공시 문장을 원문 옆에 두고 사람이 닫게 합니다</h1>
         <p class="lead">
-          지속가능경영 보고서를 사람이 확인할 수 있게, 주장과 원문 근거를 조항마다 연결하는 제품을 만듭니다.
+          ESGOLOGY는 지속가능성 관련 공시 검토를 제품으로 만듭니다. 점수를 주지 않고, 조항마다 근거 위치를 남깁니다.
         </p>
-      </section>
-
-      <section class="card" aria-labelledby="product-card">
-        <p class="kicker">제품 하나</p>
-        <h2 id="product-card">ESG CHECK</h2>
-        <p>
-          표와 본문 데이터를 기준 원문과 비교 검토하고, 고객이 직접 확인 후 결과보고서로 만듭니다.
-        </p>
-        <p>
-          <a class="cta" href="https://esgcheck.kr/">esgcheck.kr에서 제품 보기</a>
-        </p>
-      </section>
-
-      <section class="split" aria-labelledby="do-dont">
-        <h2 id="do-dont" class="sr">하는 일 / 하지 않는 일</h2>
-        <div>
-          <h3>하는 일</h3>
-          <ul>
-            <li>보고서 주장과 원문 근거를 조항마다 연결</li>
-            <li>사람이 확인한 뒤 결과보고서로 확정</li>
-            <li>합성 데모로 제품 흐름을 먼저 보여 줌</li>
-          </ul>
-        </div>
-        <div>
-          <h3>하지 않는 일</h3>
-          <ul>
-            <li>자동 준수·인증·감사 판정</li>
-            <li>법률·회계 의견</li>
-            <li>이 사이트에서 앱 로그인·자료 업로드</li>
-          </ul>
+        <div class="actions">
+          <a class="cta" href="https://esgcheck.kr/">제품 보기</a>
+          <a class="ghost" href="#work">하는 일</a>
         </div>
       </section>
+
+      <section id="work" aria-labelledby="work-title">
+        <h2 id="work-title" class="visually-hidden">하는 일과 하지 않는 일</h2>
+        <dl class="ledger">
+          <div class="row">
+            <dt>문제</dt>
+            <dd>보고서 수치와 표가 기준 조항, 원문 쪽과 따로 놉니다. 담당자는 파일을 오가며 확인합니다.</dd>
+          </div>
+          <div class="row">
+            <dt>방법</dt>
+            <dd>주장·표·수치를 기준 원문과 나란히 두고, 사람이 확인한 뒤 검토보고서로 닫습니다.</dd>
+          </div>
+          <div class="row">
+            <dt>경계</dt>
+            <dd>자동 준수·인증·감사 판정, 법률·회계 의견을 내지 않습니다. 이 사이트에서 로그인하거나 자료를 받지 않습니다.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="split" id="product" aria-labelledby="product-title">
+        <article class="panel">
+          <h2 id="product-title">제품 하나</h2>
+          <p>ESG CHECK. 표와 본문 데이터를 기준 원문과 비교 검토하고, 고객이 직접 확인 후 검토보고서로 만듭니다.</p>
+          <p><a class="cta" href="https://esgcheck.kr/">esgcheck.kr</a></p>
+        </article>
+        <article class="panel">
+          <h2>이 홈에 없는 것</h2>
+          <ul>
+            <li>앱 화면 복제, 업로드, 결제</li>
+            <li>고객 로고 벽, 점수, 메달</li>
+            <li>회사 메일을 가장한 문의 폼</li>
+          </ul>
+        </article>
+      </section>
+
+      <p class="note">
+        사업자 등록 전에는 회사 메일 도메인을 열지 않습니다. 연락은
+        <a href="mailto:esgcheck@gmail.com">esgcheck@gmail.com</a>
+      </p>
     </main>
 
     <footer>
       <p>ESGOLOGY · 제품 <a href="https://esgcheck.kr/">ESG CHECK</a></p>
-      <p>사업자 등록 전 연락: esgcheck@gmail.com</p>
+      <p>esgology.co.kr · 앱 호스트가 아닙니다</p>
     </footer>
   </body>
 </html>
