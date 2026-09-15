@@ -38,6 +38,8 @@ const server = http.createServer((req, res) => {
             return route.continue();
           });
           await page.goto(origin);
+          await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href','https://esgology.co.kr/');
+          await expect(page.locator('meta[name="description"]')).not.toHaveAttribute('content',/시안|교체 예정/);
           await page.evaluate(async () => {
             await Promise.all([...document.images].map(img => { img.loading = 'eager'; return img.decode(); }));
           });
@@ -87,6 +89,7 @@ const server = http.createServer((req, res) => {
             await expect(trigger).toBeFocused();
             await page.locator('#credits-open').click();
             await expect(page.locator('#credits-dialog')).toContainText('AI로 생성한');
+            await expect(page.locator('#credits-dialog')).toContainText('당사 시설이나 고객 사례를 촬영한 사진이 아닙니다');
             await page.locator('#credits-dialog [data-close]').click();
             const animated = width > 600 && height >= 800 && reducedMotion !== 'reduce';
             if (animated) {
