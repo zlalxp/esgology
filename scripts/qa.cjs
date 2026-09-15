@@ -57,6 +57,12 @@ const server = http.createServer((req, res) => {
             }
           }
           assert.equal(await page.locator('video').count(), 0);
+          await expect(page.locator('.product-capture img')).toHaveAttribute('src','assets/product-map.webp');
+          await expect(page.locator('.product-caption')).toContainText('출시 준비 중인 버전');
+          await expect(page.locator('.product-caption')).toContainText('AI 답변 연결은 준비 중');
+          await expect(page.locator('.capture-image')).toHaveAttribute('href','assets/product-map.webp');
+          assert.equal(await page.locator('.app-window').count(),0);
+
           assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `overflow ${width}x${height}`);
           await expect(page.locator('h1')).toBeVisible();
           const heroBounds = await page.locator('.hero-copy').boundingBox();
@@ -114,6 +120,7 @@ const server = http.createServer((req, res) => {
             await expect(page.locator('.hero-copy')).not.toHaveAttribute('inert','');
             await page.screenshot({ path: path.join(out, `hero-${width}.png`) });
             await page.locator('#product').scrollIntoViewIfNeeded();
+            await page.evaluate(() => document.activeElement instanceof HTMLElement && document.activeElement.blur());
             await page.locator('#product').screenshot({ path: path.join(out, `product-${width}.png`) });
           }
           assert.deepEqual(errors, []);
