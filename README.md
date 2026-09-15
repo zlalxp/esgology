@@ -14,6 +14,8 @@ Do not clone other companies' pages, logos, or app UI.
 
 ## Scroll design review
 
+PR 자동 검증은 `.github/workflows/company-qa.yml`을 사용한다. `npm ci`, `npx playwright install chromium`, `QA_BROWSER=chromium npm test`로 같은 24조합 검사를 실행할 수 있다. 문법 검사는 `npm run check`다. 결과 경로 `QA_OUT`은 사이트 폴더 밖으로 지정한다. CI 구성·검증 범위는 [CI-READINESS](docs/CI-READINESS.md)를 참고한다. 정적 사이트에 런타임 npm 의존성이나 배포 자동화는 추가하지 않았다.
+
 `feat/company-scroll-20260915` integrates the preserved company preview and original generated concept images. It is not a deployed production release. See `docs/SCROLL-INTEGRATION.md` and `docs/RESUME.md` for remaining work.
 
 The homepage uses `site.css` and `site.js`; secondary pages retain `styles.css`.
