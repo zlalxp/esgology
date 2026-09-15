@@ -8,6 +8,32 @@
   const clamp = value => Math.min(1, Math.max(0, value));
   let ticking = false;
 
+  const video = $('#hero-video');
+  const videoToggle = $('#video-toggle');
+  let userPaused = false;
+  function syncVideoButton() {
+    videoToggle.textContent = video.paused ? '영상 재생' : '영상 일시정지';
+    videoToggle.setAttribute('aria-pressed', String(!video.paused));
+  }
+  function syncVideo() {
+    if (reduced.matches) { video.pause(); videoToggle.hidden = true; return; }
+    if (document.hidden || userPaused) { video.pause(); return; }
+    if (!video.getAttribute('src')) video.src = video.dataset.src;
+    video.play().catch(() => { if (!video.error && !reduced.matches) videoToggle.hidden = false; syncVideoButton(); });
+  }
+  video.addEventListener('playing', () => { video.classList.add('ready'); videoToggle.hidden = reduced.matches; syncVideoButton(); });
+  video.addEventListener('pause', syncVideoButton);
+  video.addEventListener('error', () => { video.classList.remove('ready'); videoToggle.hidden = true; });
+  videoToggle.addEventListener('click', () => {
+    if (reduced.matches) return;
+    userPaused = !video.paused;
+    if (userPaused) video.pause();
+    else { if (!video.getAttribute('src')) video.src = video.dataset.src; video.play().catch(syncVideoButton); }
+  });
+  document.addEventListener('visibilitychange', syncVideo);
+  reduced.addEventListener('change', syncVideo);
+  syncVideo();
+
   function renderScroll() {
     const animated = !compact.matches && !reduced.matches;
     root.classList.toggle('scenes-animated', animated);

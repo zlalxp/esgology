@@ -40,3 +40,14 @@ html:not(.scenes-animated) #scene-counter{display:none}
 .product-caption>span:last-child{max-width:530px;line-height:1.8}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:600px){.product-stage.product-capture{margin:0 -12px;padding:12px}.capture-label{font-size:15px;padding-bottom:13px}.capture-label span{font-size:10px}.product-capture figcaption{font-size:11px;flex-direction:column;gap:8px}.product-caption>span:last-child{margin-top:8px}}
+
+/* Backgrounds remain visible in short, reduced-motion and no-JS layouts. */
+html:not(.scenes-animated) .scene-copy{padding:clamp(28px,5vw,72px);margin:24px 0;border:0;border-radius:12px;overflow:hidden;background-size:cover;background-position:center;min-height:360px;display:flex;flex-direction:column;justify-content:flex-end}
+html:not(.scenes-animated) .scene-copy:nth-child(1){background-image:linear-gradient(90deg,#101820dd,#10182066),url('assets/evidence.webp')}
+html:not(.scenes-animated) .scene-copy:nth-child(2){background-image:linear-gradient(90deg,#101820dd,#10182066),url('assets/atrium.webp')}
+html:not(.scenes-animated) .scene-copy:nth-child(3){background-image:linear-gradient(90deg,#101820dd,#10182066),url('assets/operations.webp')}
+html:not(.scenes-animated) .scene-copy:before{display:none}
+.closing-water{position:absolute;inset:0;background:#163744 url('https://framerusercontent.com/images/OU4uGFkQMFwavvpvMW84UW9da0.png?width=2670&height=1780') center/cover no-repeat}
+#video-toggle{border:1px solid #ffffff80;border-radius:4px;background:#0006;color:white}
+#video-toggle[hidden]{display:none}
+@media(max-width:600px){html:not(.scenes-animated) .scene-copy{margin:20px -8px;padding:28px 24px;min-height:410px}.hero-bottom #video-toggle{margin-left:auto}}

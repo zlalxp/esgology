@@ -1,3 +1,5 @@
+현재 상태: 사용자의 영상·이미지 재배치 요청으로 아래 공개 후보는 재검토 중입니다. 최신 범위는 [MEDIA-RESTORE-20260916.md](MEDIA-RESTORE-20260916.md)를 따릅니다.
+
 # 회사소개 공개 후보
 
 - Task: COMPANY-PUBLIC-COPY-20260916

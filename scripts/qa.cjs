@@ -10,6 +10,10 @@ const out = path.resolve(process.env.QA_OUT || path.join(root, '..', 'company-qa
 assert(!out.startsWith(root + path.sep) && out !== root, 'QA_OUT must be outside the site');
 fs.mkdirSync(out, { recursive: true });
 const results = [];
+const referenceMedia = new Set([
+  'https://framerusercontent.com/assets/B1E36n5Z6jDij8UJYkjAIGrRups.mp4',
+  'https://framerusercontent.com/images/OU4uGFkQMFwavvpvMW84UW9da0.png?width=2670&height=1780'
+]);
 const server = http.createServer((req, res) => {
   const name = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   const file = path.resolve(root, '.' + (name === '/' ? '/index.html' : name));
@@ -34,7 +38,7 @@ const server = http.createServer((req, res) => {
           const errors = [], external = [];
           page.on('pageerror', e => errors.push(e.message));
           await page.route('**/*', route => {
-            if (new URL(route.request().url()).origin !== origin) { external.push(route.request().url()); return route.abort(); }
+            if (new URL(route.request().url()).origin !== origin) { if (!referenceMedia.has(route.request().url())) external.push(route.request().url()); return route.abort(); }
             return route.continue();
           });
           await page.goto(origin);
@@ -44,11 +48,11 @@ const server = http.createServer((req, res) => {
             await Promise.all([...document.images].map(img => { img.loading = 'eager'; return img.decode(); }));
           });
           assert(await page.evaluate(() => [...document.images].every(img => new URL(img.currentSrc).pathname.endsWith('.webp'))), 'images must use delivery WebP');
-          if (width <= 600) {
-            const backgrounds = await page.locator('.scene-copy').evaluateAll(elements => elements.map(el => getComputedStyle(el, '::before').backgroundImage));
+          if (width <= 600 || height < 800 || reducedMotion === 'reduce' || !javaScriptEnabled) {
+            const backgrounds = await page.locator('.scene-copy').evaluateAll(elements => elements.map(el => getComputedStyle(el).backgroundImage));
             assert.equal(backgrounds.length, 3);
             for (const background of backgrounds) {
-              const match = /^url\("([^"\n]+)"\)$/.exec(background);
+              const match = /url\("([^"\n]+)"\)/.exec(background);
               assert(match, `missing mobile scene image: ${background}`);
               const url = new URL(match[1]);
               assert.equal(url.origin, origin);
@@ -58,7 +62,13 @@ const server = http.createServer((req, res) => {
               assert.equal(response.headers()['content-type'], 'image/webp');
             }
           }
-          assert.equal(await page.locator('video').count(), 0);
+          assert.equal(await page.locator('video').count(), 1);
+          await expect(page.locator('#hero-video')).toHaveAttribute('muted','');
+          await expect(page.locator('#hero-video')).toHaveAttribute('playsinline','');
+          if (!javaScriptEnabled || reducedMotion === 'reduce') await expect(page.locator('#hero-video')).not.toHaveAttribute('src', /./);
+          assert.equal(new Set(await page.locator('.case-card img').evaluateAll(els => els.map(el => el.getAttribute('src')))).size,3);
+          await expect(page.locator('.case-card img').nth(2)).toHaveAttribute('src','assets/transition.webp');
+          await expect(page.locator('.closing-water')).toHaveCSS('background-image',/OU4uGFkQMFwavvpvMW84UW9da0/);
           await expect(page.locator('.product-capture img')).toHaveAttribute('src','assets/product-map.webp');
           await expect(page.locator('.product-caption')).toContainText('출시 준비 중인 버전');
           await expect(page.locator('.product-caption')).toContainText('AI 답변 연결은 준비 중');
