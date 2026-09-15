@@ -1,0 +1,20 @@
+{
+  "serviceSha": "4815219de30e4060972ea40be3e5a4e74d0a46b0",
+  "source": "company-map-capture-final-4815219/product-map.png",
+  "sourceSha256": "c3187eceb16811111cb1209a0a99954605db2d7e04ef8f9aa9ec19b056244acc",
+  "file": "assets/product-map.webp",
+  "sha256": "17f125881be96b7c4d7170a4765de96373a0bd41e2d216d121fcb09f6dbf9e4b",
+  "width": 1208,
+  "height": 1025,
+  "bytes": 62160,
+  "lossless": true,
+  "synthetic": true,
+  "production": false,
+  "scope": "Actual built UI and local API/worker: signup, CSV upload, extraction, source comparison, correction 125 to 130. No external AI call.",
+  "excluded": [
+    "download",
+    "billing",
+    "production"
+  ],
+  "captureHarnessSha256": "614340edbc1ffe021f9543f08c0ed10bad62ea4b2903e47cec30f6490b55970f"
+}

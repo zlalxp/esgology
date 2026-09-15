@@ -1,0 +1,79 @@
+{
+  "date": "2026-09-15",
+  "mode": "built-in image_gen; text-to-image; no reference images",
+  "status": "Design review assets in a GitHub feature branch; production website not deployed by this change. Fictional concept imagery, not company premises or customers. Trademark and video clearance are separate.",
+  "assets": [
+    {
+      "name": "atrium",
+      "file": "assets/atrium.png",
+      "source": "exec-757886db-55ec-4573-96da-7d5f4c62412c.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: original cinematic hero photograph for ESGOLOGY, a Korean sustainability information software company. Create a wide 16:9 editorial architectural photograph of a sophisticated contemporary industrial research-building interior: a vast quiet atrium, long perspective lines, precise pale concrete and brushed metal, glass partitions revealing distant orderly engineering work areas, subtle real cable trays and structural details, soft daylight entering from the right. It must feel like a real architectural photograph with natural material texture, restrained warm white, charcoal and neutral steel tones; sophisticated, human, grounded, not futuristic AI artwork. Compose strong architectural depth with the central-left and lower-left somewhat darker and uncluttered for a large white Korean headline to be overlaid by HTML. No text anywhere, no logos, no people, no visible screens with fake dashboards, no neon, no teal/purple glow, no floating particles or network graphics. Entirely fictional facility, not a depiction of ESGOLOGY's own premises and not copied from any particular company's site. Photorealistic high-end professional architectural photography, realistic geometry, controlled highlights, wide-angle 28mm feel, subtle film grain. One single coherent full-frame photograph, not a collage or web mockup.",
+      "sha256": "24296fe252c646359c91f1459eecc4279ae64050de09dbdd99a4732d26c3acc1",
+      "delivery": {
+        "file": "assets/atrium.webp",
+        "encoding": "WebP lossless",
+        "sha256": "1597acdb0f6d1cc30f6e9c95d6e7023fca4894f995b20003497622ce03f07fd7",
+        "sourceBytes": 2161569,
+        "deliveryBytes": 1558702,
+        "width": 1672,
+        "height": 941,
+        "decodedPixelSha256": "ea6eb319148583f1450adbdea9416e67c8eb4f35905524b7f5c2de96a5fe3c8f",
+        "identicalDecodedPixels": true
+      }
+    },
+    {
+      "name": "operations",
+      "file": "assets/operations.png",
+      "source": "exec-8d287645-339a-4e95-8cdd-024830fe38c3.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide 16:9 editorial image for a Korean sustainability software company's industry section. One coherent premium photograph of a modern manufacturing hall, long clean production line with physically plausible robotic arms and neatly routed power cabling, precision metal components, tall roof and natural window light. Professional industrial photography, restrained neutral steel, warm white, graphite and very subtle muted warm machine accents. Realistic engineering details and material wear, crisp depth, no people, no text, logos, fake data overlays or luminous network lines. Grounded sophisticated real-world industry rather than futuristic AI aesthetics. Fictional generic site, not a claimed customer or company facility. Original composition.",
+      "sha256": "1fe427190f82f6079187256fde357d9d7ea1c7a925cc46b27c62918e1289b520",
+      "delivery": {
+        "file": "assets/operations.webp",
+        "encoding": "WebP lossless",
+        "sha256": "1567b2b6eb123aa242a926d56f2b5b6669bac99f3ec281bfe867add289038918",
+        "sourceBytes": 2371914,
+        "deliveryBytes": 1699954,
+        "width": 1672,
+        "height": 941,
+        "decodedPixelSha256": "fcae57f5628210491f37074b8e101b3f0f817a2f7f79fd571818e32f1bdf8c29",
+        "identicalDecodedPixels": true
+      }
+    },
+    {
+      "name": "evidence",
+      "file": "assets/evidence.png",
+      "source": "exec-145ba595-d537-4de7-833f-5d7147968bc3.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide 16:9 cinematic editorial photograph for a sustainability evidence and review website. Quiet contemporary project room with a long dark worktable in the foreground, a few neatly open technical reports containing small abstract tables and fine diagram shapes with no legible words, simple folders, a closed dark laptop and a mechanical pencil. Large glass partitions, natural afternoon side light, concrete and oak materials, subtle reflection, credible human working context without any people. Refined neutral charcoal, off-white and soft warm tones. High-end architectural/editorial photography with tactile paper texture; not a product mockup and no readable text, company logo, stock watermark, neon, data particles or AI graphics. Single coherent composition, original fictional workplace.",
+      "sha256": "aa9e969ae45972655a1797c2f7716c64049e4e1adea01de4ad525ba2a43fc36f",
+      "delivery": {
+        "file": "assets/evidence.webp",
+        "encoding": "WebP lossless",
+        "sha256": "e69af5322f0009818323204b11619f27370952620f7fb9db278f549bebfa2d2d",
+        "sourceBytes": 1968204,
+        "deliveryBytes": 1414198,
+        "width": 1672,
+        "height": 941,
+        "decodedPixelSha256": "3cae2447ae3dac1308459838a4f6c57e9f4e34101bfca9eea2d0afab76174266",
+        "identicalDecodedPixels": true
+      }
+    },
+    {
+      "name": "transition",
+      "file": "assets/transition.png",
+      "source": "exec-c296b92f-1d2a-482b-8d87-185e70ca2e5e.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide 16:9 editorial landscape photograph for a sustainability software company, showing the connection between industrial activity and energy transition. A contemporary generic logistics facility in a broad open landscape, orderly loading bays and two unbranded freight trucks, roof solar panels catching low warm morning light, electric substation and power cables placed plausibly at the edge of the site. View from a moderately elevated camera, realistic scale, restrained muted colors, soft atmospheric depth and natural sky; high-end architectural/industrial documentary photography. No people, text, logos, futuristic city, hovering graphics, neon or greenwashing fantasy. Entirely fictional generic facility, not a claimed ESGOLOGY site or customer. Original single coherent image.",
+      "sha256": "5aa67941bf51e8efe761de9da881607121dca10389c42f62c4ad1615e01ce90c",
+      "delivery": {
+        "file": "assets/transition.webp",
+        "encoding": "WebP lossless",
+        "sha256": "6743a313307f92f7ec3cc94912f6c01f4c12e751b75472392c3f42fae3669e80",
+        "sourceBytes": 2336480,
+        "deliveryBytes": 1715102,
+        "width": 1672,
+        "height": 941,
+        "decodedPixelSha256": "8eab075f6c3064f3afb3a15d21ce8c32384f10dd51d33a9b7a2203a6f0bad6a7",
+        "identicalDecodedPixels": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "esgology-company-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "check": "node --check site.js && node --check scripts/qa.cjs && node --check scripts/encode-images.cjs",
+    "test": "node scripts/qa.cjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}
