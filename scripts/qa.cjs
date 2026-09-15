@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) {
     res.writeHead(404); return res.end();
   }
-  const type = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.png': 'image/png' }[path.extname(file)];
+  const type = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.png': 'image/png', '.webp': 'image/webp' }[path.extname(file)];
   res.setHeader('Content-Type', type || 'application/octet-stream');
   fs.createReadStream(file).pipe(res);
 });
@@ -41,6 +41,21 @@ const server = http.createServer((req, res) => {
           await page.evaluate(async () => {
             await Promise.all([...document.images].map(img => { img.loading = 'eager'; return img.decode(); }));
           });
+          assert(await page.evaluate(() => [...document.images].every(img => new URL(img.currentSrc).pathname.endsWith('.webp'))), 'images must use delivery WebP');
+          if (width <= 600) {
+            const backgrounds = await page.locator('.scene-copy').evaluateAll(elements => elements.map(el => getComputedStyle(el, '::before').backgroundImage));
+            assert.equal(backgrounds.length, 3);
+            for (const background of backgrounds) {
+              const match = /^url\("([^"\n]+)"\)$/.exec(background);
+              assert(match, `missing mobile scene image: ${background}`);
+              const url = new URL(match[1]);
+              assert.equal(url.origin, origin);
+              assert(url.pathname.endsWith('.webp'));
+              const response = await page.request.get(url.href);
+              assert.equal(response.status(), 200);
+              assert.equal(response.headers()['content-type'], 'image/webp');
+            }
+          }
           assert.equal(await page.locator('video').count(), 0);
           assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `overflow ${width}x${height}`);
           await expect(page.locator('h1')).toBeVisible();

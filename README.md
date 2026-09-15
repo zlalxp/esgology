@@ -17,4 +17,5 @@ Do not clone other companies' pages, logos, or app UI.
 `feat/company-scroll-20260915` integrates the preserved company preview and original generated concept images. It is not a deployed production release. See `docs/SCROLL-INTEGRATION.md` and `docs/RESUME.md` for remaining work.
 
 The homepage uses `site.css` and `site.js`; secondary pages retain `styles.css`.
+Image delivery uses lossless WebP while retaining original PNGs. See `docs/IMAGE-DELIVERY.md`; `node scripts/encode-images.cjs` requires Sharp at build time only and verifies source hashes and decoded pixel equality.
 Run `node scripts/qa.cjs` with Node and `@playwright/test` available. It launches a temporary loopback HTTP server and closes it and the browser on exit. `QA_BROWSER` defaults to `msedge`. Set `QA_OUT` to a directory outside this published site; screenshots and JSON results go there. An existing Playwright installation can be used through `NODE_PATH`; no production dependency is needed.
