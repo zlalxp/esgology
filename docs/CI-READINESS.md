@@ -20,3 +20,5 @@
 Node24 문법 검사 exit0, 기존 Edge24개 조합 PASS. 결과는 `C:/Users/김희태/Claude/esgology-local-test/company-ci-local-20260916/result.json`과 같은 폴더의 PNG다. lockfile 생성 exit0, Playwright와 하위 의존성 버전·integrity 고정. GitHub Ubuntu/Chromium 실행 결과는 아직 확인하지 않았다.
 
 독립 정적 검토는 권한·버전 고정·아티팩트 경로의 차단 오류를 발견하지 못했다. 초기 QA 실패 때 PNG/JSON이 생성되지 않을 수 있다는 P3를 반영해, `pipefail`을 유지하면서 QA 콘솔 로그도 테스트 임시 폴더에 저장하고 업로드한다. 브라우저 설치 이전 실패는 Actions 단계 로그로 확인한다.
+
+첫 GitHub 실행34995867595는 workflow file issue로 실행 전 실패했다. job env에서 지원하지 않는 runner context를 사용한 QA_OUT을 실행 step env로 옮겼다. 실패한 SHA0d7e413의 CI를 통과로 기록하지 않는다.

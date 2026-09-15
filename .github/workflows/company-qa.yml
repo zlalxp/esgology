@@ -19,7 +19,6 @@ jobs:
     timeout-minutes: 10
     env:
       QA_BROWSER: chromium
-      QA_OUT: ${{ runner.temp }}/company-qa
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -32,6 +31,8 @@ jobs:
       - run: npx --no-install playwright install --with-deps chromium
       - run: npm run check
       - name: Run existing browser QA
+        env:
+          QA_OUT: ${{ runner.temp }}/company-qa
         run: |
           set -o pipefail
           mkdir -p "$QA_OUT"
