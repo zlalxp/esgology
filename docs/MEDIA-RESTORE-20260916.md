@@ -13,3 +13,5 @@ Task COMPANY-MEDIA-RESTORE-20260916. 기준 7937b5ba594d3d28c8ad6ddfa4e028ed6770
 실제 미디어 확인: Edge 라이브 재생 PASS. 영상 길이 14.186초, readyState4/paused=false/currentTime2.998초 확인. 재생·일시정지 버튼 PASS. 기존 물속 이미지 2670×1780 decode PASS. 첫 sandbox 실행의30초 timeout 이후 네트워크 접근 가능한 실행에서 확인했으며, 로딩 실패 fallback은 별도24조합에서 검증했다. 증거: esgology-local-test/company-media-20260916/live-media.json 및 hero-video-live.png, closing-water-live.png, approach-short.png, cases-mobile.png. 새 영상 생성은 하지 않았다.
 
 독립 읽기 검토(cp79_review): P1/P2 없음. 모션 감소를 실행 중 켰을 때 숨겨진 영상의 재생 버튼이 남는 접근성 동작1건을 발견해 버튼도 함께 숨기도록 보완했다. 실제 브라우저에서 재생 → reduce(영상 정지/버튼숨김) → no-preference(재생복구) 확인 PASS. live-media.json과 스크린샷은 최종 실행으로 갱신됐다.
+
+최종 검토 보완: 사용자가 먼저 영상을 정지한 뒤 모션 감소를 켰다가 끄면 재생 버튼이 숨겨진 채 남는 문제가 있었다. 모션 감소가 해제되면 사용자의 정지 상태를 유지하면서 버튼을 복구하도록 수정했다. 실제 Edge에서 정지 → 모션 감소 켜기 → 끄기 → 버튼으로 재생 재개를 확인했다. `live-media.json`의 `pausedMotionRoundTrip: PASS`와 같은 폴더의 실행 스크립트에 증거를 남겼다.

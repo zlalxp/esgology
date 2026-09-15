@@ -17,6 +17,7 @@
   }
   function syncVideo() {
     if (reduced.matches) { video.pause(); videoToggle.hidden = true; return; }
+    if (video.getAttribute('src') && !video.error) videoToggle.hidden = false;
     if (document.hidden || userPaused) { video.pause(); return; }
     if (!video.getAttribute('src')) video.src = video.dataset.src;
     video.play().catch(() => { if (!video.error && !reduced.matches) videoToggle.hidden = false; syncVideoButton(); });
