@@ -1,7 +1,7 @@
 {
   "date": "2026-09-15",
   "mode": "built-in image_gen; text-to-image; no reference images",
-  "status": "Local visual review only; not published. Fictional concept imagery, not company premises or customers. Trademark and video clearance are separate.",
+  "status": "Design review assets in a GitHub feature branch; production website not deployed by this change. Fictional concept imagery, not company premises or customers. Trademark and video clearance are separate.",
   "assets": [
     {
       "name": "atrium",
