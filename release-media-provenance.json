@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-20",
+  "approval": "User approved selected photos for immediate deployment; rejected earlier generated video.",
+  "hero": {
+    "sha256": "c189a30580517b7693be3519d1dde236e8cdc993edb1640ceeed3b6afc133547",
+    "source": "esgcheck-design-refresh-20260920/assets/01-atrium.webp",
+    "file": "assets/hero-atrium.webp",
+    "type": "original AI-generated fictional interior; not company premises"
+  },
+  "closing": {
+    "sha256": "a490b98786bce9135c27a8bc2f2f4e966d5b693dad509856b79e689012d04082",
+    "source": "esgcheck-design-refresh-20260920/assets/06-water.webp",
+    "file": "assets/closing-water.webp",
+    "type": "original AI-generated fictional water treatment facility; not a customer site"
+  },
+  "referenceMediaRemoved": true,
+  "newGeneration": false
+}

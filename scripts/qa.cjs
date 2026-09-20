@@ -10,10 +10,7 @@ const out = path.resolve(process.env.QA_OUT || path.join(root, '..', 'company-qa
 assert(!out.startsWith(root + path.sep) && out !== root, 'QA_OUT must be outside the site');
 fs.mkdirSync(out, { recursive: true });
 const results = [];
-const referenceMedia = new Set([
-  'https://framerusercontent.com/assets/B1E36n5Z6jDij8UJYkjAIGrRups.mp4',
-  'https://framerusercontent.com/images/OU4uGFkQMFwavvpvMW84UW9da0.png?width=2670&height=1780'
-]);
+
 const server = http.createServer((req, res) => {
   const name = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
   const file = path.resolve(root, '.' + (name === '/' ? '/index.html' : name));
@@ -38,7 +35,7 @@ const server = http.createServer((req, res) => {
           const errors = [], external = [];
           page.on('pageerror', e => errors.push(e.message));
           await page.route('**/*', route => {
-            if (new URL(route.request().url()).origin !== origin) { if (!referenceMedia.has(route.request().url())) external.push(route.request().url()); return route.abort(); }
+            if (new URL(route.request().url()).origin !== origin) { external.push(route.request().url()); return route.abort(); }
             return route.continue();
           });
           await page.goto(origin);
@@ -62,17 +59,19 @@ const server = http.createServer((req, res) => {
               assert.equal(response.headers()['content-type'], 'image/webp');
             }
           }
-          assert.equal(await page.locator('video').count(), 1);
-          await expect(page.locator('#hero-video')).toHaveAttribute('muted','');
-          await expect(page.locator('#hero-video')).toHaveAttribute('playsinline','');
-          if (!javaScriptEnabled || reducedMotion === 'reduce') await expect(page.locator('#hero-video')).not.toHaveAttribute('src', /./);
+          assert.equal(await page.locator('video').count(), 0);
+          await expect(page.locator('.hero-fallback')).toHaveAttribute('src','assets/hero-atrium.webp');
           assert.equal(new Set(await page.locator('.case-card img').evaluateAll(els => els.map(el => el.getAttribute('src')))).size,3);
           await expect(page.locator('.case-card img').nth(2)).toHaveAttribute('src','assets/transition.webp');
-          await expect(page.locator('.closing-water')).toHaveCSS('background-image',/OU4uGFkQMFwavvpvMW84UW9da0/);
-          await expect(page.locator('.product-capture img')).toHaveAttribute('src','assets/product-map.webp');
-          await expect(page.locator('.product-caption')).toContainText('출시 준비 중인 버전');
-          await expect(page.locator('.product-caption')).toContainText('AI 답변 연결은 준비 중');
-          await expect(page.locator('.capture-image')).toHaveAttribute('href','assets/product-map.webp');
+          await expect(page.locator('.closing-water')).toHaveCSS('background-image',/assets\/closing-water\.webp/);
+          await expect(page.locator('.workspace-example')).toContainText('원본 검토');
+          await expect(page.locator('.workspace-example')).toContainText('375 MWh');
+          await expect(page.locator('.capture-label')).toContainText('화면 예시');
+          await expect(page.locator('.product-caption')).toContainText('자료 → 관계 지도 → 원본 대조 → 정정 이력');
+          await expect(page.locator('body')).not.toContainText('출시 준비 중인 버전');
+          await expect(page.locator('body')).not.toContainText('AI 답변 연결은 준비 중');
+          await expect(page.locator('body')).not.toContainText('일은 계속되니까');
+          await expect(page.locator('.product-capture a')).toHaveAttribute('href','https://esgcheck.kr/#demo');
           assert.equal(await page.locator('.app-window').count(),0);
 
           assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `overflow ${width}x${height}`);
