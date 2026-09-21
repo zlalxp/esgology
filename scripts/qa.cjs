@@ -63,7 +63,7 @@ const server = http.createServer((req, res) => {
           await expect(page.locator('.hero-fallback')).toHaveAttribute('src','assets/hero-atrium.webp');
           assert.equal(new Set(await page.locator('.case-card img').evaluateAll(els => els.map(el => el.getAttribute('src')))).size,3);
           await expect(page.locator('.case-card img').nth(2)).toHaveAttribute('src','assets/transition.webp');
-          await expect(page.locator('.closing-water')).toHaveCSS('background-image',/assets\/closing-water\.webp/);
+          await expect(page.locator('.closing-forest')).toHaveCSS('background-image',/assets\/closing-forest\.webp/);
           await expect(page.locator('.workspace-example')).toContainText('원본 검토');
           await expect(page.locator('.workspace-example')).toContainText('375 MWh');
           await expect(page.locator('.capture-label')).toContainText('화면 예시');

@@ -47,7 +47,7 @@ html:not(.scenes-animated) .scene-copy:nth-child(1){background-image:linear-grad
 html:not(.scenes-animated) .scene-copy:nth-child(2){background-image:linear-gradient(90deg,#101820dd,#10182066),url('assets/atrium.webp')}
 html:not(.scenes-animated) .scene-copy:nth-child(3){background-image:linear-gradient(90deg,#101820dd,#10182066),url('assets/operations.webp')}
 html:not(.scenes-animated) .scene-copy:before{display:none}
-.closing-water{position:absolute;inset:0;background:#163744 url('assets/closing-water.webp') center/cover no-repeat}
+.closing-forest{position:absolute;inset:0;background:#173225 url('assets/closing-forest.webp') center/cover no-repeat}
 #video-toggle{border:1px solid #ffffff80;border-radius:4px;background:#0006;color:white}
 #video-toggle[hidden]{display:none}
 @media(max-width:600px){html:not(.scenes-animated) .scene-copy{margin:20px -8px;padding:28px 24px;min-height:410px}.hero-bottom #video-toggle{margin-left:auto}}
