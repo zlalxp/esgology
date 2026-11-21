@@ -8,6 +8,42 @@
   const clamp = value => Math.min(1, Math.max(0, value));
   let ticking = false;
 
+  const video = $('#hero-video');
+  const videoToggle = $('#video-toggle');
+  let pausedByVisitor = false;
+
+  function updateVideoControl() {
+    videoToggle.hidden = !video.src || !!video.error || reduced.matches;
+    videoToggle.textContent = video.paused ? '영상 재생' : '영상 일시정지';
+  }
+
+  function syncVideo() {
+    if (document.hidden || reduced.matches || pausedByVisitor || video.error) {
+      video.pause();
+      updateVideoControl();
+      return;
+    }
+    if (!video.src) video.src = video.dataset.src;
+    video.play().catch(updateVideoControl);
+  }
+
+  video.addEventListener('playing', () => {
+    video.classList.add('ready');
+    updateVideoControl();
+  });
+  video.addEventListener('pause', updateVideoControl);
+  video.addEventListener('error', () => {
+    video.classList.remove('ready');
+    updateVideoControl();
+  });
+  videoToggle.addEventListener('click', () => {
+    pausedByVisitor = !video.paused;
+    syncVideo();
+  });
+  document.addEventListener('visibilitychange', syncVideo);
+  reduced.addEventListener('change', syncVideo);
+  syncVideo();
+
   function renderScroll() {
     const animated = !compact.matches && !reduced.matches;
     root.classList.toggle('scenes-animated', animated);

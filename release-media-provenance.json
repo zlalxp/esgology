@@ -13,7 +13,6 @@
     "sha256": "cc7811e8cdd67f4c5b63f9bfc7d97b7d7e76760331156d83416f21c22d10d878",
     "type": "Original AI-generated Korean forest concept; not a documented real location"
   },
-  "referenceMediaRemoved": true,
   "newGeneration": true,
   "middleWater": {
     "sha256": "a490b98786bce9135c27a8bc2f2f4e966d5b693dad509856b79e689012d04082",
@@ -21,5 +20,11 @@
     "file": "assets/closing-water.webp",
     "type": "original AI-generated fictional water treatment facility; not a customer site",
     "placement": "First use-case card, replacing duplicated atrium image"
+  },
+  "heroVideo": {
+    "source": "https://framerusercontent.com/assets/B1E36n5Z6jDij8UJYkjAIGrRups.mp4",
+    "previousCommit": "31f660a58fc805eddba36e61397d624843a552bb",
+    "placement": "Company home hero. The approved atrium still remains the fallback.",
+    "publicUseRights": "Unconfirmed. Original design-review reference; confirm commercial public use before publishing."
   }
 }

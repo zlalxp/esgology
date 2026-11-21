@@ -10,6 +10,7 @@ const out = path.resolve(process.env.QA_OUT || path.join(root, '..', 'company-qa
 assert(!out.startsWith(root + path.sep) && out !== root, 'QA_OUT must be outside the site');
 fs.mkdirSync(out, { recursive: true });
 const results = [];
+const heroFilm = 'https://framerusercontent.com/assets/B1E36n5Z6jDij8UJYkjAIGrRups.mp4';
 
 const server = http.createServer((req, res) => {
   const name = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
@@ -26,7 +27,34 @@ const server = http.createServer((req, res) => {
   try {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     const origin = `http://127.0.0.1:${server.address().port}`;
-    browser = await chromium.launch({ channel: process.env.QA_BROWSER || 'msedge', headless: true });
+    browser = await chromium.launch({ ...(process.env.QA_CHROMIUM_PATH ? { executablePath: process.env.QA_CHROMIUM_PATH } : { channel: process.env.QA_BROWSER || 'msedge' }), headless: true });
+    // A one-second synthetic clip verifies playback controls without relying on the external CDN.
+    const playback = await browser.newContext({ viewport: { width: 375, height: 812 } });
+    try {
+      const page = await playback.newPage();
+      await page.route(heroFilm, route => route.fulfill({
+        contentType: 'video/webm', path: path.join(__dirname, 'fixtures/playback.webm'),
+      }));
+      await page.goto(origin);
+      const video = page.locator('#hero-video'), toggle = page.locator('#video-toggle');
+      await expect(video).toHaveClass(/ready/);
+      await expect.poll(() => video.evaluate(el => el.currentTime)).toBeGreaterThan(0);
+      await expect(toggle).toHaveAccessibleName('영상 일시정지');
+      await toggle.focus();
+      await page.keyboard.press('Enter');
+      await expect(toggle).toHaveAccessibleName('영상 재생');
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      await expect(toggle).toBeHidden();
+      await page.emulateMedia({ reducedMotion: 'no-preference' });
+      await expect(toggle).toBeVisible();
+      await expect.poll(() => video.evaluate(el => el.paused)).toBe(true);
+      await toggle.focus();
+      await page.keyboard.press('Space');
+      await expect(toggle).toHaveAccessibleName('영상 일시정지');
+      await expect.poll(() => video.evaluate(el => el.paused)).toBe(false);
+    } finally {
+      await playback.close();
+    }
     for (const javaScriptEnabled of [true, false]) {
       for (const reducedMotion of ['no-preference', 'reduce']) {
         for (const [width, height] of [[1440,960],[768,960],[375,812],[320,568],[1440,600],[1920,740]]) {
@@ -59,7 +87,16 @@ const server = http.createServer((req, res) => {
               assert.equal(response.headers()['content-type'], 'image/webp');
             }
           }
-          assert.equal(await page.locator('video').count(), 0);
+          const video = page.locator('#hero-video');
+          const allowMotion = javaScriptEnabled && reducedMotion === 'no-preference';
+          await expect(video).toHaveAttribute('data-src', heroFilm);
+          if (allowMotion) {
+            await expect.poll(() => video.evaluate(el => !!el.error)).toBe(true);
+            await expect(video).toHaveCSS('opacity', '0');
+          } else {
+            await expect(video).not.toHaveAttribute('src', /./);
+          }
+          await expect(page.locator('#video-toggle')).toBeHidden();
           await expect(page.locator('.hero-fallback')).toHaveAttribute('src','assets/hero-atrium.webp');
           assert.equal(new Set(await page.locator('.case-card img').evaluateAll(els => els.map(el => el.getAttribute('src')))).size,3);
           await expect(page.locator('.case-card img').nth(2)).toHaveAttribute('src','assets/transition.webp');
@@ -136,7 +173,7 @@ const server = http.createServer((req, res) => {
             await page.locator('#product').screenshot({ path: path.join(out, `product-${width}.png`) });
           }
           assert.deepEqual(errors, []);
-          assert.deepEqual(external, []);
+          assert.deepEqual([...new Set(external)], allowMotion ? [heroFilm] : []);
           results.push({ width, height, javaScriptEnabled, reducedMotion, status: 'PASS' });
           await context.close();
         }
